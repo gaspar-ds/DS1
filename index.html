@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DS1 - Gaspar Doval</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Fuente militar -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="DS1 Logo" class="logo">
+    <h1>DS1 - Gaspar Doval</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#about">Perfil</a></li>
+      <li><a href="#skills">Habilidades</a></li>
+      <li><a href="#projects">Proyectos</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="about">
+      <h2>Sobre mí</h2>
+      <p>Hola, soy <strong>Gaspar Doval</strong> (DS1). Programador especializado en desarrollo web y mobile, integración de IA, sistemas de login y pagos.</p>
+    </section>
+
+    <section id="skills">
+      <h2>Habilidades</h2>
+      <ul>
+        <li>🌐 Programación Web y Mobile</li>
+        <li>🤖 Integración de Inteligencia Artificial</li>
+        <li>🔐 Sistemas de Login y Pagos</li>
+        <li>📡 Integración de APIs y Redes Sociales</li>
+        <li>🎮 Experiencias en 3D y Realidad Aumentada</li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2>Proyectos</h2>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Usuario" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button type="submit">Iniciar sesión</button>
+        <button type="button" id="openRegister" style="margin-left:8px;">Crear cuenta</button>
+        <span id="loginMsg"></span>
+      </form>
+
+      <!-- Modal de registro -->
+      <div id="registerModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="closeRegister">&times;</span>
+          <h3>Crear cuenta</h3>
+          <form id="registerModalForm">
+            <input type="text" id="regUsername" placeholder="Nuevo usuario" required>
+            <input type="password" id="regPassword" placeholder="Nueva contraseña" required>
+            <button type="submit">Registrar</button>
+            <span id="registerMsg"></span>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal de Email -->
+      <div id="mailModal" class="modal">
+        <div class="modal-content" style="max-width:400px;">
+          <span class="close" id="closeMailModal">&times;</span>
+          <h3>Enviar Email</h3>
+          <form id="mailForm" enctype="multipart/form-data">
+            <input type="email" id="mailFrom" placeholder="Tu email" required style="width:100%;margin-bottom:8px;">
+            <input type="text" id="mailSubject" placeholder="Asunto" required style="width:100%;margin-bottom:8px;">
+            <textarea id="mailBody" placeholder="Mensaje" required style="width:100%;height:80px;margin-bottom:8px;"></textarea>
+            <input type="file" id="mailAttachment" accept="image/*" multiple style="margin-bottom:8px;">
+            <button type="submit" style="width:100%;">Enviar</button>
+            <span id="mailMsg"></span>
+          </form>
+        </div>
+      </div>
+
+      <div class="carousel" id="socialCarousel">
+        <div class="carousel-track">
+          <a href="https://twitter.com/" target="_blank"><i class="fa-brands fa-x-twitter fa-2x"></i></a>
+          <a href="https://github.com/" target="_blank"><i class="fa-brands fa-github fa-2x"></i></a>
+          <a href="https://linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin fa-2x"></i></a>
+          <a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram fa-2x"></i></a>
+          <!-- Repite para efecto infinito -->
+          <a href="https://twitter.com/" target="_blank"><i class="fa-brands fa-x-twitter fa-2x"></i></a>
+          <a href="https://github.com/" target="_blank"><i class="fa-brands fa-github fa-2x"></i></a>
+          <a href="https://linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin fa-2x"></i></a>
+          <a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram fa-2x"></i></a>
+        </div>
+      </div>
+
+      <div class="donate">
+        <h3>Donar</h3>
+        <a href="https://www.paypal.com/donate?hosted_button_id=TU_ID_PAYPAL" target="_blank" title="Donar con PayPal">
+          <i class="fa-brands fa-paypal fa-3x" style="color:#00457C; background:transparent; border-radius:12px; padding:8px;"></i>
+        </a>
+        <a href="https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_ID_MERCADOPAGO" target="_blank" title="Donar con Mercado Pago">
+          <i class="fa-solid fa-money-bill-wave fa-3x" style="color:#009ee3; background:transparent; border-radius:12px; padding:8px;"></i>
+        </a>
+        <a href="https://buy.stripe.com/test_XXXXXXXXXXXXXX" target="_blank" title="Donar con Stripe">
+          <i class="fa-brands fa-stripe fa-3x" style="color:#635bff; background:transparent; border-radius:12px; padding:8px;"></i>
+        </a>
+      </div>
+
+      <!-- Contenedor de perfil de usuario -->
+      <div id="userProfile" style="display:none;">
+        <div id="profilePicContainer">
+          <img id="profilePic" src="https://i.pravatar.cc/80?img=1" alt="Perfil" style="border-radius:50%;width:80px;height:80px;">
+          <div id="profileUsername"></div>
+          <button id="profileMenuBtn">☰</button>
+        </div>
+        <div id="profileMenu" style="display:none;position:absolute;right:10px;top:100px;background:#23272b;border-radius:8px;padding:12px;box-shadow:0 2px 8px #000a;">
+          <button id="logoutBtn">Cerrar sesión</button><br>
+          <button id="changeNameBtn">Cambiar nombre</button><br>
+          <button id="changePicBtn">Cambiar imagen</button>
+          <form id="uploadPicForm" style="display:none;margin-top:8px;">
+            <input type="file" id="newPic" accept="image/*">
+            <button type="submit">Subir</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contacto</h2>
+      <p>Podés escribirme directamente desde el chat o a mis redes sociales.</p>
+
+      <div id="chatbot"></div>
+
+      <!-- Botón de WhatsApp -->
+      <a href="https://wa.me/5491123456789?text=Hola%20Gaspar%20Doval%20desde%20tu%20web" 
+         target="_blank" 
+         style="display:inline-block;margin-top:16px;">
+        <i class="fa-brands fa-whatsapp fa-2x" style="color:#25d366;vertical-align:middle;"></i>
+        <span style="font-size:1.1em;vertical-align:middle;margin-left:8px;color:#25d366;">Enviar WhatsApp</span>
+      </a>
+
+      <!-- Botón de Email -->
+      <button id="openMailModal" style="display:inline-block;margin-top:16px;margin-left:16px;background:transparent;border:none;cursor:pointer;">
+        <i class="fa-solid fa-envelope fa-2x" style="color:#0072c6;vertical-align:middle;"></i>
+        <span style="font-size:1.1em;vertical-align:middle;margin-left:8px;color:#0072c6;">Enviar Email</span>
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 DS1 - Gaspar Doval</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+document.querySelectorAll("h2").forEach(h2 => {
+  h2.addEventListener("mouseover", () => {
+    h2.style.textShadow = "0 0 8px red, 0 0 16px #ff0000";
+    setTimeout(() => h2.style.textShadow = "none", 300);
+  });
+});
+
+function showProfile(username, picUrl) {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('userProfile').style.display = 'block';
+  document.getElementById('profileUsername').textContent = username;
+  const savedPic = localStorage.getItem('ds1_pic');
+  document.getElementById('profilePic').src = picUrl || savedPic || `https://i.pravatar.cc/80?u=${username}`;
+}
+
+// Login
+document.getElementById('loginForm')?.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const msg = document.getElementById('loginMsg');
+  try {
+    const res = await fetch('http://localhost:3001/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const text = await res.text();
+    msg.textContent = text;
+    msg.style.color = res.ok ? 'limegreen' : 'red';
+    if (res.ok) {
+      localStorage.setItem('ds1_user', username);
+      setTimeout(() => {
+        showProfile(username);
+      }, 800);
+    }
+  } catch {
+    msg.textContent = 'Error de conexión';
+    msg.style.color = 'red';
+  }
+});
+
+// Modal de registro
+const openRegister = document.getElementById('openRegister');
+const registerModal = document.getElementById('registerModal');
+const closeRegister = document.getElementById('closeRegister');
+
+openRegister?.addEventListener('click', () => {
+  registerModal.classList.add('show');
+});
+closeRegister?.addEventListener('click', () => {
+  registerModal.classList.remove('show');
+});
+window.addEventListener('click', (e) => {
+  if (registerModal && e.target === registerModal) registerModal.classList.remove('show');
+  if (profileMenu && !profileMenu.contains(e.target) && e.target !== profileMenuBtn) {
+    profileMenu.style.display = 'none';
+  }
+});
+
+// Registro de usuario (dentro del modal)
+document.getElementById('registerModalForm')?.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const username = document.getElementById('regUsername').value;
+  const password = document.getElementById('regPassword').value;
+  const msg = document.getElementById('registerMsg');
+  try {
+    const res = await fetch('http://localhost:3001/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const text = await res.text();
+    msg.textContent = text;
+    msg.style.color = res.ok ? 'limegreen' : 'red';
+    if (res.ok) {
+      localStorage.setItem('ds1_user', username);
+      setTimeout(() => {
+        document.getElementById('registerModal').classList.remove('show');
+        showProfile(username);
+      }, 1200);
+    }
+  } catch {
+    msg.textContent = 'Error de conexión';
+    msg.style.color = 'red';
+  }
+});
+
+// Carrusel auto-scroll
+const carousel = document.getElementById('socialCarousel');
+if (carousel) {
+  setInterval(() => {
+    carousel.appendChild(carousel.firstElementChild);
+  }, 2000);
+}
+
+// Menú lateral de perfil
+const profileMenuBtn = document.getElementById('profileMenuBtn');
+const profileMenu = document.getElementById('profileMenu');
+profileMenuBtn?.addEventListener('click', () => {
+  profileMenu.style.display = profileMenu.style.display === 'block' ? 'none' : 'block';
+});
+
+// Cerrar sesión
+document.getElementById('logoutBtn')?.addEventListener('click', () => {
+  localStorage.removeItem('ds1_user');
+  localStorage.removeItem('ds1_pic');
+  document.getElementById('userProfile').style.display = 'none';
+  document.getElementById('loginForm').style.display = 'block';
+});
+
+// Cambiar nombre
+document.getElementById('changeNameBtn')?.addEventListener('click', async () => {
+  const newName = prompt('Nuevo nombre de usuario:');
+  if (newName) {
+    const res = await fetch('http://localhost:3001/change-username', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: document.getElementById('profileUsername').textContent, newUsername: newName })
+    });
+    if (res.ok) {
+      document.getElementById('profileUsername').textContent = newName;
+      localStorage.setItem('ds1_user', newName);
+      alert('Nombre actualizado');
+    } else {
+      alert('Error al cambiar nombre');
+    }
+  }
+});
+
+// Cambiar imagen de perfil
+document.getElementById('changePicBtn')?.addEventListener('click', () => {
+  document.getElementById('uploadPicForm').style.display = 'block';
+});
+document.getElementById('uploadPicForm')?.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const fileInput = document.getElementById('newPic');
+  if (fileInput.files.length === 0) return;
+  const formData = new FormData();
+  formData.append('username', document.getElementById('profileUsername').textContent);
+  formData.append('profilePic', fileInput.files[0]);
+  const res = await fetch('http://localhost:3001/upload-profile-pic', {
+    method: 'POST',
+    body: formData
+  });
+  if (res.ok) {
+    const data = await res.json();
+    document.getElementById('profilePic').src = data.url;
+    localStorage.setItem('ds1_pic', data.url);
+    alert('Imagen actualizada');
+    document.getElementById('uploadPicForm').style.display = 'none';
+  } else {
+    alert('Error al subir imagen');
+  }
+});
+
+// Persistencia de sesión e imagen
+const savedUser = localStorage.getItem('ds1_user');
+if (savedUser) {
+  showProfile(savedUser);
+}
+</script>
+</body>
+</html>

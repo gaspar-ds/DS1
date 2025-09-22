@@ -1,0 +1,251 @@
+body {
+  margin: 0;
+  font-family: 'Share Tech Mono', monospace;
+  background: #181c1f;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #e0e0e0;
+  text-align: center;
+}
+
+/* Efecto de scanlines animadas */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.03) 0px,
+    rgba(255,255,255,0.03) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  animation: scanlines 1s linear infinite;
+}
+
+@keyframes scanlines {
+  0% { background-position-y: 0; }
+  100% { background-position-y: 4px; }
+}
+
+/* Efecto de ruido digital animado */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: url('https://media.githubusercontent.com/media/kevquirk/noise.js/main/noise.png');
+  opacity: 0.07;
+  animation: noise 0.3s steps(2) infinite;
+}
+
+@keyframes noise {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+header {
+  padding: 20px;
+  border-bottom: 2px solid red;
+  background: #111;
+}
+
+.logo {
+  width: 120px;
+  display: block;
+  margin: 0 auto;
+}
+
+nav {
+  background: #222;
+  padding: 10px;
+  border-bottom: 2px solid red;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: red;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+nav ul li a:hover {
+  color: white;
+  text-shadow: 0 0 10px red;
+}
+
+section {
+  padding: 50px 20px;
+  border-bottom: 1px solid #333;
+}
+
+footer {
+  padding: 20px;
+  background: #111;
+  border-top: 2px solid red;
+  font-size: 14px;
+}
+
+/* Asegúrate que el contenido esté por encima del fondo animado */
+header, nav, main, footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Carrusel fluido */
+.carousel {
+  width: 260px;
+  overflow: hidden;
+  margin: 20px auto;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.3);
+  box-shadow: 0 2px 8px #0008;
+  position: relative;
+  height: 60px;
+  align-items: center;
+  display: flex;
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-carousel 12s linear infinite;
+}
+
+.carousel a {
+  flex: 0 0 60px;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.carousel img {
+  width: 40px;
+  height: 40px;
+  filter: grayscale(1) brightness(1.2);
+  transition: filter 0.2s;
+}
+
+.carousel a:hover img {
+  filter: none;
+}
+
+@keyframes scroll-carousel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Modal flotante para registro */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+.modal.show {
+  display: flex;
+}
+.modal-content {
+  background: #23272b;
+  color: #fff;
+  padding: 32px 24px 24px 24px;
+  border-radius: 8px;
+  min-width: 280px;
+  box-shadow: 0 4px 24px #000a;
+  position: relative;
+  font-family: 'Share Tech Mono', monospace;
+}
+.modal-content h3 {
+  margin-top: 0;
+}
+.close {
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #ff5555;
+}
+.modal-content input, .modal-content button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+}
+
+#userProfile {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  text-align: right;
+  z-index: 10;
+}
+#profilePicContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+#profileMenuBtn {
+  background: #23272b;
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-top: 6px;
+}
+#profileMenu button {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  background: #23272b;
+  color: #fff;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#profileMenu button:hover {
+  background: #444;
+}
+
+#skills {
+  text-align: left;
+}
+#skills ul {
+  margin-left: 0;
+  padding-left: 1.5em;
+  text-align: left;
+}
+
+/* Botones de donación grandes y con fondo transparente */
+.donate a img {
+  height: 64px !important;
+  width: auto;
+  margin: 0 12px 12px 0;
+  background: transparent !important;
+  border-radius: 12px;
+  box-shadow: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 8px;
+}
+
+.donate a img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 2px 16px #0004;
+  background: rgba(255,255,255,0.08);
+}
