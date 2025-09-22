@@ -317,5 +317,20 @@ if (savedUser) {
   showProfile(savedUser);
 }
 </script>
+<script>
+async function testBackend() {
+  try {
+    const res = await fetch("http://localhost:3001/api/hello"); 
+    const data = await res.json();
+    console.log(data.message); // Muestra "Hola desde el backend DS1 🚀"
+    document.body.insertAdjacentHTML("beforeend", `<p>${data.message}</p>`);
+  } catch (err) {
+    console.error("Error conectando con backend:", err);
+  }
+}
+
+testBackend();
+</script>
+
 </body>
 </html>
